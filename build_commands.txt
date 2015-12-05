@@ -1,5 +1,5 @@
 To Build 
-javac src/om/edu/mec/SmartHouse/*.java -d class/
+javac src/om/edu/mec/smartHouse/*.java -d class/
 
 To Run
 java -classpath class/ om.edu.mec.smartHouse.SmartHouseServer
