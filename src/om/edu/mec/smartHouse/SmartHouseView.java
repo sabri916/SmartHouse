@@ -4,6 +4,8 @@ import java.awt.*;
 
 class SmartHouseView extends Frame{
 
+	SmartHouseModel myModel;
+
 	private Label fireLabel;
 	private Label leakLabel;
 	private Label lightLabel;
@@ -27,12 +29,12 @@ class SmartHouseView extends Frame{
 	private FlowLayout leakButtonLayout;
 	private FlowLayout lightButtonLayout;
 
-	SmartHouseView(){
-		System.out.println("View Constructor");
+	SmartHouseView(SmartHouseModel myModel){
+		this.myModel = myModel;
 		//setSize and location and title
 		setTitle("Smart House Server");
 		setSize(650,500);
-		setLocation(650,1100);
+		setLocation(1200,900);
 
 		//instantiate 
 		fireLabel = new Label("No Fire");
@@ -81,6 +83,9 @@ class SmartHouseView extends Frame{
 		leakButtonPanel.add(leakOff);
 		lightButtonPanel.add(lightOn);
 		lightButtonPanel.add(ligthtOff);
+
+		//adding ActionListeners
+		fireOn.addActionListener(new FireOnButtonListener(myModel,fireLabel));
 
 	}
 }
