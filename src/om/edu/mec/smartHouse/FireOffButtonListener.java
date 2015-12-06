@@ -6,15 +6,15 @@ import java.awt.event.*;
 class FireOffButtonListener implements ActionListener{
 
 	SmartHouseModel myModel;
-	Label fireLabel;
+	SmartHouseView myView;
 
-	FireOnButtonListener(SmartHouseModel myModel,Label fireLabel){
+	FireOffButtonListener(SmartHouseModel myModel,SmartHouseView myView){
 		this.myModel = myModel;
-		this.fireLabel = fireLabel;
+		this.myView = myView;
 	}
 	
 	public void actionPerformed(ActionEvent e){
 		myModel.setFireStatus(false);
-		fireLabel.setText("Fire Off");
+		myView.setFireLabel(false);
 	}
 }

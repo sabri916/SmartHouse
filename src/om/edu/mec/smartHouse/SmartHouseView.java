@@ -85,7 +85,38 @@ class SmartHouseView extends Frame{
 		lightButtonPanel.add(ligthtOff);
 
 		//adding ActionListeners
-		fireOn.addActionListener(new FireOnButtonListener(myModel,fireLabel));
+		fireOn.addActionListener(new FireOnButtonListener(myModel,this));
+		fireOff.addActionListener(new FireOffButtonListener(myModel,this));
+		leakOn.addActionListener(new LeakOnButtonListener(myModel,this));
+		leakOff.addActionListener(new LeakOffButtonListener(myModel,this));
+		lightOn.addActionListener(new LightsOnButtonListener(myModel,this));
+		ligthtOff.addActionListener(new LightsOffButtonListener(myModel,this));
 
 	}
+
+	void setFireLabel(boolean x){
+		if(x){
+			fireLabel.setText("On Fire!!! T.T");
+		}else{
+			fireLabel.setText("No Fire");
+		}
+	}
+
+	void setLeakLabel(boolean x){
+		if(x){
+			leakLabel.setText("Water is leaking!!! T.T");
+		}else{
+			leakLabel.setText("No Water Leak");
+		}
+	}
+
+	void setLightLabel(boolean x){
+		if(x){
+			lightLabel.setText("Lights are On ^.^");
+		}else{
+			lightLabel.setText("Lights Off");
+		}
+	}
+
+
 }
