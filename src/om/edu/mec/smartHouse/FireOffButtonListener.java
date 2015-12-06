@@ -15,6 +15,6 @@ class FireOffButtonListener implements ActionListener{
 	
 	public void actionPerformed(ActionEvent e){
 		myModel.setFireStatus(false);
-		myView.setFireLabel(false);
+		myView.reloadView();
 	}
 }

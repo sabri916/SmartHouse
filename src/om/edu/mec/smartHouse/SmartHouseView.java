@@ -94,29 +94,24 @@ class SmartHouseView extends Frame{
 
 	}
 
-	void setFireLabel(boolean x){
-		if(x){
+	void reloadView(){
+
+		if(myModel.getFireStatus()){
 			fireLabel.setText("On Fire!!! T.T");
 		}else{
 			fireLabel.setText("No Fire");
 		}
-	}
 
-	void setLeakLabel(boolean x){
-		if(x){
+		if(myModel.getLeakStatus()){
 			leakLabel.setText("Water is leaking!!! T.T");
 		}else{
 			leakLabel.setText("No Water Leak");
 		}
-	}
 
-	void setLightLabel(boolean x){
-		if(x){
+		if(myModel.getLightStatus()){
 			lightLabel.setText("Lights are On ^.^");
 		}else{
 			lightLabel.setText("Lights Off");
 		}
 	}
-
-
 }

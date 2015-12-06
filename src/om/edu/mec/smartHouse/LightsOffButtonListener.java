@@ -15,6 +15,6 @@ class LightsOffButtonListener implements ActionListener{
 	
 	public void actionPerformed(ActionEvent e){
 		myModel.setLightStatus(false);
-		myView.setLightLabel(false);
+		myView.reloadView();
 	}
 }

@@ -15,6 +15,6 @@ class LeakOnButtonListener implements ActionListener{
 	
 	public void actionPerformed(ActionEvent e){
 		myModel.setLeakStatus(true);
-		myView.setLeakLabel(true);
+		myView.reloadView();
 	}
 }

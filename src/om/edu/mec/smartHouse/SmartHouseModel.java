@@ -22,7 +22,7 @@ public class SmartHouseModel{
 
 
 	boolean getLeakStatus(){
-		return isOnFire;
+		return isLeaking;
 	}
 
 	void setLeakStatus(boolean x){
@@ -30,7 +30,7 @@ public class SmartHouseModel{
 	}
 
 	boolean getLightStatus(){
-		return isOnFire;
+		return isLightOn;
 	}
 
 	void setLightStatus(boolean x){
