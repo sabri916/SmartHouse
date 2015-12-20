@@ -1,6 +1,8 @@
 package om.edu.mec.smartHouse;
 
-public class SmartHouseModel{
+import java.util.Observable;
+
+public class SmartHouseModel extends Observable{
 
 	private boolean isOnFire;
 	private boolean isLeaking;
@@ -18,6 +20,9 @@ public class SmartHouseModel{
 
 	void setFireStatus(boolean x){
 		isOnFire=x;
+		System.out.println("setFire");
+		setChanged();
+		notifyObservers(this);
 	}
 
 
@@ -27,6 +32,8 @@ public class SmartHouseModel{
 
 	void setLeakStatus(boolean x){
 		isLeaking=x;
+		setChanged();
+		notifyObservers(this);
 	}
 
 	boolean getLightStatus(){
@@ -35,6 +42,8 @@ public class SmartHouseModel{
 
 	void setLightStatus(boolean x){
 		isLightOn=x;
+		setChanged();
+		notifyObservers(this);
 	}
 
 }

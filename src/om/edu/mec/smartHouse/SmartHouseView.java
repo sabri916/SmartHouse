@@ -1,8 +1,10 @@
 package om.edu.mec.smartHouse;
 
 import java.awt.*;
+import java.util.Observer;
+import java.util.Observable;
 
-class SmartHouseView extends Frame{
+class SmartHouseView extends Frame implements Observer{
 
 	SmartHouseModel myModel;
 
@@ -94,21 +96,23 @@ class SmartHouseView extends Frame{
 
 	}
 
-	void reloadView(){
+	public void update(Observable o, Object arg){
 
-		if(myModel.getFireStatus()){
+		SmartHouseModel model = (SmartHouseModel) arg;
+
+		if(model.getFireStatus()){
 			fireLabel.setText("On Fire!!! T.T");
 		}else{
 			fireLabel.setText("No Fire");
 		}
 
-		if(myModel.getLeakStatus()){
+		if(model.getLeakStatus()){
 			leakLabel.setText("Water is leaking!!! T.T");
 		}else{
 			leakLabel.setText("No Water Leak");
 		}
 
-		if(myModel.getLightStatus()){
+		if(model.getLightStatus()){
 			lightLabel.setText("Lights are On ^.^");
 		}else{
 			lightLabel.setText("Lights Off");

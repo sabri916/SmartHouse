@@ -15,6 +15,6 @@ class FireOnButtonListener implements ActionListener{
 	
 	public void actionPerformed(ActionEvent e){
 		myModel.setFireStatus(true);
-		myView.reloadView();
+		System.out.println("fire on");
 	}
 }

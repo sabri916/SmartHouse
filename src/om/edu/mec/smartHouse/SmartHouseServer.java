@@ -7,6 +7,7 @@ public class SmartHouseServer{
 		SmartHouseModel myModel = new SmartHouseModel();
 		ConnectionManager myConnectionManager = new ConnectionManager(myModel);
 		SmartHouseView myView = new SmartHouseView(myModel);
+		myModel.addObserver(myView);
 		myView.setVisible(true);
 		myConnectionManager.startServer();
 
