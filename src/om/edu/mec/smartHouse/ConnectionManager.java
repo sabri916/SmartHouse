@@ -75,6 +75,13 @@ class ConnectionManager{
 			catch(Exception ic){
 				ic.printStackTrace();
 			}
+			try{
+				is.close();
+				os.close();
+
+			}catch(Exception e){
+				System.out.println(e);
+			}
 		}
 	}
 }

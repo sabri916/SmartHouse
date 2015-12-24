@@ -3,3 +3,9 @@ javac src/om/edu/mec/smartHouse/*.java -d class/
 
 To Run
 java -classpath class/ om.edu.mec.smartHouse.SmartHouseServer
+
+To Build Client
+javac src/om/edu/mec/smartHouseClient/*.java -d class/
+
+To Run Client
+java -classpath class/ om.edu.mec.smartHouseClient.SmartHouseClient
