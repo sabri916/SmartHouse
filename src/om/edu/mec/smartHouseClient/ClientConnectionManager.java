@@ -28,7 +28,8 @@ class ClientConnectionManager{
 		}
 
 		try {
-			os.writeBytes("1");
+			os.writeBytes("1\n");
+			os.flush();
 		}
 		catch (IOException e) {
 			System.out.println("error writing to server."+e);

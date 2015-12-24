@@ -30,11 +30,8 @@ class ConnectionManager{
 		}
 
 		while(true){
-			System.out.println("new loop");
 			try{
-				System.out.println("yellow");
 				clientSocket = myServerSocket.accept();
-				System.out.println("blue");
 				is = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 				os = new ObjectOutputStream(clientSocket.getOutputStream());
 			}catch(Exception ei){
@@ -42,11 +39,8 @@ class ConnectionManager{
 			}
 
 			try{
-				System.out.println("readingline");
 				stringReceived = is.readLine();
-				System.out.println("readinglinefinished");
-
-				if(stringReceived.equals("fire")){
+				if(stringReceived.equals("1")){
 					os.writeObject(myModel);
 				}
 			

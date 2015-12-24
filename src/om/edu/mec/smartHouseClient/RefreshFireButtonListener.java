@@ -15,7 +15,7 @@ class RefreshFireButtonListener implements ActionListener{
 	
 	public void actionPerformed(ActionEvent e){
 		//request update froms server
-		SmartHouseModel serverModel = ClientConnectionManager.getServerModel();
+		final SmartHouseModel serverModel = ClientConnectionManager.getServerModel();
 		myModel.setFireStatus(serverModel.getFireStatus());
 		myModel.setLeakStatus(serverModel.getLeakStatus());
 		myModel.setLightStatus(serverModel.getLightStatus());
