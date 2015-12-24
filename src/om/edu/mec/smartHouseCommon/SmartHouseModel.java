@@ -21,7 +21,6 @@ public class SmartHouseModel extends Observable implements Serializable{
 
 	public void setFireStatus(boolean x){
 		isOnFire=x;
-		System.out.println("setFire");
 		setChanged();
 		notifyObservers();
 	}
@@ -45,6 +44,12 @@ public class SmartHouseModel extends Observable implements Serializable{
 		isLightOn=x;
 		setChanged();
 		notifyObservers();
+	}
+
+	public void notifyUi(){
+		setChanged();
+		notifyObservers();
+		System.out.println(getFireStatus());
 	}
 
 }

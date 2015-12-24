@@ -47,31 +47,9 @@ class ConnectionManager{
 				System.out.println("readinglinefinished");
 
 				if(stringReceived.equals("fire")){
-					if(myModel.getFireStatus()){
-						os.writeBytes("Your house is on fire");
-					}
-					else{
-						os.writeBytes("Your house is not on fire");
-						os.flush();
-					}
+					os.writeObject(myModel);
 				}
-				else if(stringReceived.equals("leak")){
-					if(myModel.getLeakStatus()){
-						os.writeBytes("Your house is leaking");
-					}
-					else{
-						os.writeBytes("Your house is not leaking");
-					}
-				}
-				else if(stringReceived.equals("light")){
-					if(myModel.getLightStatus()){
-						os.writeBytes("Lights are on");
-					}
-					else{
-						os.writeBytes("Lights are off");
-					}
-				}
-
+			
 				System.out.println("We received: "+stringReceived);
 			}
 			catch(Exception ic){

@@ -3,22 +3,25 @@ package om.edu.mec.smartHouseClient;
 import java.io.*;
 import java.net.*;
 
+import om.edu.mec.smartHouseCommon.SmartHouseModel;
+
 class ClientConnectionManager{
 
 	private final static int REMOTE_PORT = 7242;
 
 	private static Socket c1 =null;
-	private static BufferedReader is = null;
+	private static ObjectInputStream is = null;
 	private static DataOutputStream os = null;
-	private static BufferedReader stdin = new BufferedReader(new InputStreamReader (System.in));
+	private static BufferedReader stdin;
 	private static String userInput = null;
-	private static String output = null;
+	private static SmartHouseModel receivedModel = null;
 
-	static void connectToServer(){
+	static SmartHouseModel connectToServer(){
 		try {
 			c1 = new Socket("localhost",REMOTE_PORT);
-			is = new BufferedReader (new InputStreamReader(c1.getInputStream()));
+			is = new ObjectInputStream (c1.getInputStream());
 			os = new DataOutputStream(c1.getOutputStream());
+			stdin = new BufferedReader(new InputStreamReader (System.in));
 		}
 		catch(UnknownHostException e1){
 			System.out.println("Unknown Host: "+e1);
@@ -28,20 +31,20 @@ class ClientConnectionManager{
 		}
 
 		try {
-			System.out.print("Please input a keyword:");
-			userInput = stdin.readLine();
-			os.writeBytes(userInput+"\n");
+			os.writeBytes("fire\n");
 		}
 		catch (IOException ex) {
 			System.out.println("error writing to server."+ex);
 		}
 
 		try {
-			output = is.readLine();
-			System.out.println("Got from server: "+output);
+			receivedModel = (SmartHouseModel)is.readObject();
 		} 
 		catch(IOException e) {
 			e.printStackTrace();
+		}
+		catch(ClassNotFoundException e){
+			System.out.println(e);
 		}
 		try {
 			is.close();
@@ -51,5 +54,6 @@ class ClientConnectionManager{
 		catch(IOException x) {
 			System.out.println("Error writing...."+x);
 		}
+		return receivedModel;
 	}
 }

@@ -95,24 +95,26 @@ class SmartHouseClientView extends Frame implements Observer{
 
 	public void update(Observable o, Object arg){
 
-		// SmartHouseModel model = (SmartHouseModel) o;
+		SmartHouseModel model = (SmartHouseModel) o;
 
-		// if(model.getFireStatus()){
-		// 	fireLabel.setText("On Fire!!! T.T");
-		// }else{
-		// 	fireLabel.setText("No Fire");
-		// }
+		System.out.println(model.getFireStatus());
 
-		// if(model.getLeakStatus()){
-		// 	leakLabel.setText("Water is leaking!!! T.T");
-		// }else{
-		// 	leakLabel.setText("No Water Leak");
-		// }
+		if(model.getFireStatus()){
+			fireLabel.setText("On Fire!!! T.T");
+		}else{
+			fireLabel.setText("No Fire");
+		}
 
-		// if(model.getLightStatus()){
-		// 	lightLabel.setText("Lights are On ^.^");
-		// }else{
-		// 	lightLabel.setText("Lights Off");
-		// }
+		if(model.getLeakStatus()){
+			leakLabel.setText("Water is leaking!!! T.T");
+		}else{
+			leakLabel.setText("No Water Leak");
+		}
+
+		if(model.getLightStatus()){
+			lightLabel.setText("Lights are On ^.^");
+		}else{
+			lightLabel.setText("Lights Off");
+		}
 	}
 }
