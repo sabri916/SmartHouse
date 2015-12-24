@@ -22,7 +22,7 @@ public class SmartHouseModel extends Observable{
 		isOnFire=x;
 		System.out.println("setFire");
 		setChanged();
-		notifyObservers(this);
+		notifyObservers();
 	}
 
 
@@ -33,7 +33,7 @@ public class SmartHouseModel extends Observable{
 	void setLeakStatus(boolean x){
 		isLeaking=x;
 		setChanged();
-		notifyObservers(this);
+		notifyObservers();
 	}
 
 	boolean getLightStatus(){
@@ -43,7 +43,7 @@ public class SmartHouseModel extends Observable{
 	void setLightStatus(boolean x){
 		isLightOn=x;
 		setChanged();
-		notifyObservers(this);
+		notifyObservers();
 	}
 
 }

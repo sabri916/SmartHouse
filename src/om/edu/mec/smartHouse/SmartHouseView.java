@@ -98,7 +98,7 @@ class SmartHouseView extends Frame implements Observer{
 
 	public void update(Observable o, Object arg){
 
-		SmartHouseModel model = (SmartHouseModel) arg;
+		SmartHouseModel model = (SmartHouseModel) o;
 
 		if(model.getFireStatus()){
 			fireLabel.setText("On Fire!!! T.T");
