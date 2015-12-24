@@ -11,25 +11,18 @@ class SmartHouseClientView extends Frame implements Observer{
 
 	SmartHouseModel myModel;
 
+	private MenuBar myMenuBar;
+	private Menu myMenu;
+	private MenuItem ipMenuItem;
+
 	private Label fireLabel;
 	private Label leakLabel;
 	private Label lightLabel;
 
 	private Button refreshFireButton;
-	private Button refreshLeakButton;
-	private Button refreshLightButton;
 
 	private Panel statusPanel;
 	private Panel buttonPanel;
-	private Panel fireButtonPanel;
-	private Panel leakButtonPanel;
-	private Panel lightButtonPanel;
-
-	private BorderLayout mainLayout;
-	private GridLayout statusLayout;
-	private FlowLayout fireButtonLayout;
-	private FlowLayout leakButtonLayout;
-	private FlowLayout lightButtonLayout;
 
 	SmartHouseClientView(SmartHouseModel myModel){
 		this.myModel = myModel;
@@ -44,19 +37,24 @@ class SmartHouseClientView extends Frame implements Observer{
 		});
 
 		//instantiate 
+		myMenuBar = new MenuBar();
+		myMenu = new Menu("options");
+		ipMenuItem = new MenuItem("Set Server IP");
+
+
 		fireLabel = new Label("No Fire");
 		leakLabel = new Label("No Water Leak");
 		lightLabel = new Label("Lights Off");
 
 		refreshFireButton = new Button("Refresh");
-		refreshLeakButton = new Button("Refresh");
-		refreshLightButton = new Button("Refresh");
 
 		statusPanel = new Panel(new GridLayout(1,3,50,50));
-		buttonPanel = new Panel(new GridLayout(1,3,50,50));
-		fireButtonPanel = new Panel(new GridLayout(1,2));
-		leakButtonPanel = new Panel(new GridLayout(1,2));
-		lightButtonPanel = new Panel(new GridLayout(1,2));
+		buttonPanel = new Panel(new FlowLayout(10));
+
+		//Set Menu
+		myMenu.add(ipMenuItem);
+		myMenuBar.add(myMenu);
+		setMenuBar(myMenuBar);
 
 		//set layout manager
 		setLayout(new BorderLayout(10,10));
@@ -75,19 +73,12 @@ class SmartHouseClientView extends Frame implements Observer{
 		leakLabel.setAlignment(Label.CENTER);
 		lightLabel.setAlignment(Label.CENTER);
 
-		//add Button Layouts
-		buttonPanel.add(fireButtonPanel);
-		buttonPanel.add(leakButtonPanel);
-		buttonPanel.add(lightButtonPanel);
-
-		//add On/off Buttons
-		fireButtonPanel.add(refreshFireButton);
-		leakButtonPanel.add(refreshLeakButton);
-		lightButtonPanel.add(refreshLightButton);
+		//add Refresh Button
+		buttonPanel.add(refreshFireButton);
 
 		//adding ActionListeners
 		refreshFireButton.addActionListener(new RefreshFireButtonListener(myModel));
-	
+		ipMenuItem.addActionListener(new IpMenuItemActionListener());
 
 	}
 
