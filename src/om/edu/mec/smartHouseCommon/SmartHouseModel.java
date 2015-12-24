@@ -1,4 +1,4 @@
-package om.edu.mec.smartHouse;
+package om.edu.mec.smartHouseCommon;
 
 import java.util.Observable;
 
@@ -14,11 +14,11 @@ public class SmartHouseModel extends Observable{
 		 isLightOn = false;
 	}
 
-	boolean getFireStatus(){
+	public boolean getFireStatus(){
 		return isOnFire;
 	}
 
-	void setFireStatus(boolean x){
+	public void setFireStatus(boolean x){
 		isOnFire=x;
 		System.out.println("setFire");
 		setChanged();
@@ -26,21 +26,21 @@ public class SmartHouseModel extends Observable{
 	}
 
 
-	boolean getLeakStatus(){
+	public boolean getLeakStatus(){
 		return isLeaking;
 	}
 
-	void setLeakStatus(boolean x){
+	public void setLeakStatus(boolean x){
 		isLeaking=x;
 		setChanged();
 		notifyObservers();
 	}
 
-	boolean getLightStatus(){
+	public boolean getLightStatus(){
 		return isLightOn;
 	}
 
-	void setLightStatus(boolean x){
+	public void setLightStatus(boolean x){
 		isLightOn=x;
 		setChanged();
 		notifyObservers();

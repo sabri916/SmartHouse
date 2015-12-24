@@ -3,6 +3,8 @@ package om.edu.mec.smartHouse;
 import java.io.*;
 import java.net.*;
 
+import om.edu.mec.smartHouseCommon.SmartHouseModel;
+
 class ConnectionManager{
 	private final static int SERVER_PORT = 7242;
 	private ServerSocket myServerSocket = null;
