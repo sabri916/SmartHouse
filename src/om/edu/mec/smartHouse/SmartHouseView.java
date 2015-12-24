@@ -87,12 +87,12 @@ class SmartHouseView extends Frame implements Observer{
 		lightButtonPanel.add(ligthtOff);
 
 		//adding ActionListeners
-		fireOn.addActionListener(new FireOnButtonListener(myModel,this));
-		fireOff.addActionListener(new FireOffButtonListener(myModel,this));
-		leakOn.addActionListener(new LeakOnButtonListener(myModel,this));
-		leakOff.addActionListener(new LeakOffButtonListener(myModel,this));
-		lightOn.addActionListener(new LightsOnButtonListener(myModel,this));
-		ligthtOff.addActionListener(new LightsOffButtonListener(myModel,this));
+		fireOn.addActionListener(new FireOnButtonListener(myModel));
+		fireOff.addActionListener(new FireOffButtonListener(myModel));
+		leakOn.addActionListener(new LeakOnButtonListener(myModel));
+		leakOff.addActionListener(new LeakOffButtonListener(myModel));
+		lightOn.addActionListener(new LightsOnButtonListener(myModel));
+		ligthtOff.addActionListener(new LightsOffButtonListener(myModel));
 
 	}
 

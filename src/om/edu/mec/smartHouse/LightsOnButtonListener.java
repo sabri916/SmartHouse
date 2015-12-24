@@ -6,11 +6,9 @@ import java.awt.event.*;
 class LightsOnButtonListener implements ActionListener{
 
 	SmartHouseModel myModel;
-	SmartHouseView myView;
 
-	LightsOnButtonListener(SmartHouseModel myModel,SmartHouseView myView){
+	LightsOnButtonListener(SmartHouseModel myModel){
 		this.myModel = myModel;
-		this.myView = myView;
 	}
 	
 	public void actionPerformed(ActionEvent e){

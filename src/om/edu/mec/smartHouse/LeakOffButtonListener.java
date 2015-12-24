@@ -6,11 +6,9 @@ import java.awt.event.*;
 class LeakOffButtonListener implements ActionListener{
 
 	SmartHouseModel myModel;
-	SmartHouseView myView;
 
-	LeakOffButtonListener(SmartHouseModel myModel,SmartHouseView myView){
+	LeakOffButtonListener(SmartHouseModel myModel){
 		this.myModel = myModel;
-		this.myView = myView;
 	}
 	
 	public void actionPerformed(ActionEvent e){
