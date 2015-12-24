@@ -46,10 +46,4 @@ public class SmartHouseModel extends Observable implements Serializable{
 		notifyObservers();
 	}
 
-	public void notifyUi(){
-		setChanged();
-		notifyObservers();
-		System.out.println(getFireStatus());
-	}
-
 }

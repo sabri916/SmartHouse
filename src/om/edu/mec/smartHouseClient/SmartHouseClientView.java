@@ -97,8 +97,6 @@ class SmartHouseClientView extends Frame implements Observer{
 
 		SmartHouseModel model = (SmartHouseModel) o;
 
-		System.out.println(model.getFireStatus());
-
 		if(model.getFireStatus()){
 			fireLabel.setText("On Fire!!! T.T");
 		}else{

@@ -9,19 +9,16 @@ class ClientConnectionManager{
 
 	private final static int REMOTE_PORT = 7242;
 
-	private static Socket c1 =null;
+	private static Socket clientSocket =null;
 	private static ObjectInputStream is = null;
 	private static DataOutputStream os = null;
-	private static BufferedReader stdin;
-	private static String userInput = null;
 	private static SmartHouseModel receivedModel = null;
 
-	static SmartHouseModel connectToServer(){
+	static SmartHouseModel getServerModel(){
 		try {
-			c1 = new Socket("localhost",REMOTE_PORT);
-			is = new ObjectInputStream (c1.getInputStream());
-			os = new DataOutputStream(c1.getOutputStream());
-			stdin = new BufferedReader(new InputStreamReader (System.in));
+			clientSocket = new Socket("localhost",REMOTE_PORT);
+			is = new ObjectInputStream (clientSocket.getInputStream());
+			os = new DataOutputStream(clientSocket.getOutputStream());
 		}
 		catch(UnknownHostException e1){
 			System.out.println("Unknown Host: "+e1);
@@ -31,10 +28,10 @@ class ClientConnectionManager{
 		}
 
 		try {
-			os.writeBytes("fire\n");
+			os.writeBytes("1");
 		}
-		catch (IOException ex) {
-			System.out.println("error writing to server."+ex);
+		catch (IOException e) {
+			System.out.println("error writing to server."+e);
 		}
 
 		try {
@@ -49,10 +46,10 @@ class ClientConnectionManager{
 		try {
 			is.close();
 			os.close();
-			c1.close();
+			clientSocket.close();
 		}
-		catch(IOException x) {
-			System.out.println("Error writing...."+x);
+		catch(IOException e) {
+			System.out.println(e);
 		}
 		return receivedModel;
 	}
