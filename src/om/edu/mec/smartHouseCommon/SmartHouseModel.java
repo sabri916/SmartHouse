@@ -1,8 +1,9 @@
 package om.edu.mec.smartHouseCommon;
 
 import java.util.Observable;
+import java.io.Serializable;
 
-public class SmartHouseModel extends Observable{
+public class SmartHouseModel extends Observable implements Serializable{
 
 	private boolean isOnFire;
 	private boolean isLeaking;

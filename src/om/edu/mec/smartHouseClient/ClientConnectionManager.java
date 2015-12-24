@@ -5,16 +5,16 @@ import java.net.*;
 
 class ClientConnectionManager{
 
-	public final static int REMOTE_PORT = 7242;
+	private final static int REMOTE_PORT = 7242;
 
-	private Socket c1 =null;
-	private BufferedReader is = null;
-	private DataOutputStream os = null;
-	private BufferedReader stdin = new BufferedReader(new InputStreamReader (System.in));
-	private String userInput = null;
-	private String output = null;
+	private static Socket c1 =null;
+	private static BufferedReader is = null;
+	private static DataOutputStream os = null;
+	private static BufferedReader stdin = new BufferedReader(new InputStreamReader (System.in));
+	private static String userInput = null;
+	private static String output = null;
 
-	void connectToServer(){
+	static void connectToServer(){
 		try {
 			c1 = new Socket("localhost",REMOTE_PORT);
 			is = new BufferedReader (new InputStreamReader(c1.getInputStream()));

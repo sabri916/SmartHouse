@@ -10,7 +10,7 @@ class ConnectionManager{
 	private ServerSocket myServerSocket = null;
 	private String stringReceived;
 	private BufferedReader is = null;
-	private DataOutputStream os= null;
+	private ObjectOutputStream os= null;
 	private Socket clientSocket =null;
 	private SmartHouseModel myModel;
 
@@ -36,7 +36,7 @@ class ConnectionManager{
 				clientSocket = myServerSocket.accept();
 				System.out.println("blue");
 				is = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-				os = new DataOutputStream(clientSocket.getOutputStream());
+				os = new ObjectOutputStream(clientSocket.getOutputStream());
 			}catch(Exception ei){
 				ei.printStackTrace();
 			}

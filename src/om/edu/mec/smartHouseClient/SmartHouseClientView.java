@@ -86,12 +86,10 @@ class SmartHouseClientView extends Frame implements Observer{
 		lightButtonPanel.add(refreshLightButton);
 
 		//adding ActionListeners
-		// fireOn.addActionListener(new FireOnButtonListener(myModel));
-		// fireOff.addActionListener(new FireOffButtonListener(myModel));
-		// leakOn.addActionListener(new LeakOnButtonListener(myModel));
-		// leakOff.addActionListener(new LeakOffButtonListener(myModel));
-		// lightOn.addActionListener(new LightsOnButtonListener(myModel));
-		// ligthtOff.addActionListener(new LightsOffButtonListener(myModel));
+		refreshFireButton.addActionListener(new RefreshFireButtonListener(myModel));
+		// refreshLeakButton.addActionListener(new RefreshLeakButtonListener(myModel));
+		// refreshLightButton.addActionListener(new RefreshLightButtonListener(myModel));
+	
 
 	}
 
