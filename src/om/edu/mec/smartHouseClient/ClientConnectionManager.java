@@ -2,21 +2,23 @@ package om.edu.mec.smartHouseClient;
 
 import java.io.*;
 import java.net.*;
+import java.util.Observable;
 
 import om.edu.mec.smartHouseCommon.SmartHouseModel;
 
-class ClientConnectionManager{
+class ClientConnectionManager extends Observable{
 
-	private final static int REMOTE_PORT = 7242;
+	private final int REMOTE_PORT = 7242;
+	private String serverAddress = "127.0.0.1";
 
-	private static Socket clientSocket =null;
-	private static ObjectInputStream is = null;
-	private static DataOutputStream os = null;
-	private static SmartHouseModel receivedModel = null;
+	private Socket clientSocket =null;
+	private ObjectInputStream is = null;
+	private DataOutputStream os = null;
+	private SmartHouseModel receivedModel = null;
 
-	static SmartHouseModel getServerModel(){
+	SmartHouseModel getServerModel(){
 		try {
-			clientSocket = new Socket("localhost",REMOTE_PORT);
+			clientSocket = new Socket(serverAddress,REMOTE_PORT);
 			is = new ObjectInputStream (clientSocket.getInputStream());
 			os = new DataOutputStream(clientSocket.getOutputStream());
 		}
@@ -53,5 +55,16 @@ class ClientConnectionManager{
 			System.out.println(e);
 		}
 		return receivedModel;
+	}
+
+	void setServerAddress(String s){
+		serverAddress = s;
+		System.out.println(serverAddress);
+		setChanged();
+		notifyObservers();
+	}
+
+	String getServerAddress(){
+		return serverAddress;
 	}
 }

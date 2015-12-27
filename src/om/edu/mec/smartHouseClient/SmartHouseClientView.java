@@ -10,6 +10,7 @@ import om.edu.mec.smartHouseCommon.SmartHouseModel;
 class SmartHouseClientView extends Frame implements Observer{
 
 	SmartHouseModel myModel;
+	ClientConnectionManager myConnectionManager;
 
 	private MenuBar myMenuBar;
 	private Menu myMenu;
@@ -18,14 +19,18 @@ class SmartHouseClientView extends Frame implements Observer{
 	private Label fireLabel;
 	private Label leakLabel;
 	private Label lightLabel;
+	private Label ipLabel;
 
 	private Button refreshFireButton;
 
 	private Panel statusPanel;
+	private Panel bottomContainerPanel;
 	private Panel buttonPanel;
+	private Panel ipStatusBarPanel;
 
-	SmartHouseClientView(SmartHouseModel myModel){
+	SmartHouseClientView(SmartHouseModel myModel,ClientConnectionManager myConnectionManager){
 		this.myModel = myModel;
+		this.myConnectionManager = myConnectionManager;
 		//setSize and location and title
 		setTitle("Smart House Client");
 		setSize(650,500);
@@ -45,11 +50,15 @@ class SmartHouseClientView extends Frame implements Observer{
 		fireLabel = new Label("No Fire");
 		leakLabel = new Label("No Water Leak");
 		lightLabel = new Label("Lights Off");
+		ipLabel = new Label("IP Address: "+ myConnectionManager.getServerAddress());
+		ipLabel.setAlignment(Label.LEFT);
 
 		refreshFireButton = new Button("Refresh");
 
 		statusPanel = new Panel(new GridLayout(1,3,50,50));
+		bottomContainerPanel = new Panel(new GridLayout(2,1));
 		buttonPanel = new Panel(new FlowLayout(10));
+		ipStatusBarPanel = new Panel(new FlowLayout(FlowLayout.LEFT));
 
 		//Set Menu
 		myMenu.add(ipMenuItem);
@@ -61,7 +70,11 @@ class SmartHouseClientView extends Frame implements Observer{
 
 		//add Panels to Main Layout
 		add(statusPanel, BorderLayout.CENTER);
-		add(buttonPanel, BorderLayout.SOUTH);
+		add(bottomContainerPanel, BorderLayout.SOUTH);
+
+		bottomContainerPanel.add(buttonPanel);
+		bottomContainerPanel.add(ipStatusBarPanel);
+		ipStatusBarPanel.add(ipLabel);
 
 		//add status to layout
 		statusPanel.add(fireLabel);
@@ -73,18 +86,26 @@ class SmartHouseClientView extends Frame implements Observer{
 		leakLabel.setAlignment(Label.CENTER);
 		lightLabel.setAlignment(Label.CENTER);
 
-		//add Refresh Button
+		//add refresh button
 		buttonPanel.add(refreshFireButton);
 
 		//adding ActionListeners
-		refreshFireButton.addActionListener(new RefreshFireButtonListener(myModel));
-		ipMenuItem.addActionListener(new IpMenuItemActionListener());
+		refreshFireButton.addActionListener(new RefreshFireButtonListener(myModel,myConnectionManager));
+		ipMenuItem.addActionListener(new IpMenuItemActionListener(myConnectionManager));
 
 	}
 
 	public void update(Observable o, Object arg){
 
-		SmartHouseModel model = (SmartHouseModel) o;
+		SmartHouseModel model =myModel;
+
+		if(o instanceof ClientConnectionManager){
+			ClientConnectionManager c = (ClientConnectionManager) o;
+			ipLabel.setText("IP Address: " + c.getServerAddress());
+		}
+		else{
+			model = (SmartHouseModel) o;
+		}
 
 		if(model.getFireStatus()){
 			fireLabel.setText("On Fire!!! T.T");

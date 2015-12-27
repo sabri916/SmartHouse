@@ -7,15 +7,17 @@ import om.edu.mec.smartHouseCommon.SmartHouseModel;
 
 class RefreshFireButtonListener implements ActionListener{
 
-	SmartHouseModel myModel;
+	private SmartHouseModel myModel;
+	private ClientConnectionManager myConnectionManager;
 
-	RefreshFireButtonListener(SmartHouseModel myModel){
+	RefreshFireButtonListener(SmartHouseModel myModel,ClientConnectionManager myConnectionManager){
 		this.myModel = myModel;
+		this.myConnectionManager = myConnectionManager;
 	}
 	
 	public void actionPerformed(ActionEvent e){
 		//request update froms server
-		final SmartHouseModel serverModel = ClientConnectionManager.getServerModel();
+		final SmartHouseModel serverModel = myConnectionManager.getServerModel();
 		myModel.setFireStatus(serverModel.getFireStatus());
 		myModel.setLeakStatus(serverModel.getLeakStatus());
 		myModel.setLightStatus(serverModel.getLightStatus());
