@@ -4,6 +4,11 @@ import java.awt.*;
 import java.util.Observer;
 import java.util.Observable;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
+import javax.imageio.*;
+import java.io.File;
+import java.io.IOException;
+
 
 import om.edu.mec.smartHouseCommon.SmartHouseModel;
 
@@ -20,6 +25,8 @@ class SmartHouseClientView extends Frame implements Observer{
 	private Label leakLabel;
 	private Label lightLabel;
 	private Label ipLabel;
+
+	private BufferedImage moltres; 
 
 	private Button setIpButton;
 	private Button refreshFireButton;
@@ -58,6 +65,14 @@ class SmartHouseClientView extends Frame implements Observer{
 		lightLabel = new Label("Lights Off");
 		ipLabel = new Label("IP Address: "+ myConnectionManager.getServerAddress());
 		ipLabel.setAlignment(Label.LEFT);
+
+		try{
+			moltres = ImageIO.read(new File("Moltres.png"));
+		}
+		catch(IOException e){
+			System.out.println(e);
+		}
+
 
 		setIpButton = new Button("Set IP");
 		refreshFireButton = new Button("Refresh");
@@ -147,5 +162,9 @@ class SmartHouseClientView extends Frame implements Observer{
 		}else{
 			lightLabel.setText("Lights Off");
 		}
+	}
+
+	public void paint(Graphics g){
+		//g.drawImage(moltres,50,50,null);
 	}
 }
