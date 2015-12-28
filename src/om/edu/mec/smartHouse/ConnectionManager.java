@@ -40,11 +40,19 @@ class ConnectionManager{
 
 			try{
 				stringReceived = is.readLine();
+				System.out.println("string Received: " +  stringReceived);
 				if(stringReceived.equals("1")){
 					os.writeObject(myModel);
 				}
-			
-				System.out.println("We received: "+stringReceived);
+				else if(stringReceived.equals("2")){
+					myModel.setLightStatus(true);
+					os.writeObject(myModel);
+				}else if(stringReceived.equals("3")){
+					myModel.setLightStatus(false);
+					System.out.println("lights off");
+					os.writeObject(myModel);
+				}
+
 			}
 			catch(Exception ic){
 				ic.printStackTrace();

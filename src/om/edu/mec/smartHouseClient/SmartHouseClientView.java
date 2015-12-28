@@ -9,8 +9,8 @@ import om.edu.mec.smartHouseCommon.SmartHouseModel;
 
 class SmartHouseClientView extends Frame implements Observer{
 
-	SmartHouseModel myModel;
-	ClientConnectionManager myConnectionManager;
+	private SmartHouseModel myModel;
+	private ClientConnectionManager myConnectionManager;
 
 	private MenuBar myMenuBar;
 	private Menu myMenu;
@@ -21,11 +21,17 @@ class SmartHouseClientView extends Frame implements Observer{
 	private Label lightLabel;
 	private Label ipLabel;
 
+	private Button setIpButton;
 	private Button refreshFireButton;
+	private Button lightOnButton;
+	private Button lightOffButton;
 
+	private Panel topButtonsPanel;
 	private Panel statusPanel;
 	private Panel bottomContainerPanel;
-	private Panel buttonPanel;
+	private Panel buttonContainerPanel;
+	private Panel refreshButtonPanel;
+	private Panel lightButtonPanel;
 	private Panel ipStatusBarPanel;
 
 	SmartHouseClientView(SmartHouseModel myModel,ClientConnectionManager myConnectionManager){
@@ -53,12 +59,18 @@ class SmartHouseClientView extends Frame implements Observer{
 		ipLabel = new Label("IP Address: "+ myConnectionManager.getServerAddress());
 		ipLabel.setAlignment(Label.LEFT);
 
+		setIpButton = new Button("Set IP");
 		refreshFireButton = new Button("Refresh");
+		lightOnButton = new Button("Lights On");
+		lightOffButton = new Button("Lights Off");
 
+		topButtonsPanel = new Panel(new FlowLayout(FlowLayout.LEFT,15,0));
 		statusPanel = new Panel(new GridLayout(1,3,50,50));
 		bottomContainerPanel = new Panel(new GridLayout(2,1));
-		buttonPanel = new Panel(new FlowLayout(10));
-		ipStatusBarPanel = new Panel(new FlowLayout(FlowLayout.LEFT));
+		buttonContainerPanel = new Panel(new GridLayout(1,2));
+		refreshButtonPanel = new Panel(new FlowLayout(FlowLayout.LEFT,15,0));
+		lightButtonPanel = new Panel(new FlowLayout(FlowLayout.RIGHT,15,0));
+		ipStatusBarPanel = new Panel(new FlowLayout(FlowLayout.LEFT,15,10));
 
 		//Set Menu
 		myMenu.add(ipMenuItem);
@@ -69,11 +81,16 @@ class SmartHouseClientView extends Frame implements Observer{
 		setLayout(new BorderLayout(10,10));
 
 		//add Panels to Main Layout
+		add(topButtonsPanel,BorderLayout.NORTH);
 		add(statusPanel, BorderLayout.CENTER);
 		add(bottomContainerPanel, BorderLayout.SOUTH);
 
-		bottomContainerPanel.add(buttonPanel);
+		bottomContainerPanel.add(buttonContainerPanel);
 		bottomContainerPanel.add(ipStatusBarPanel);
+
+		buttonContainerPanel.add(refreshButtonPanel);
+		buttonContainerPanel.add(lightButtonPanel);
+
 		ipStatusBarPanel.add(ipLabel);
 
 		//add status to layout
@@ -87,10 +104,16 @@ class SmartHouseClientView extends Frame implements Observer{
 		lightLabel.setAlignment(Label.CENTER);
 
 		//add refresh button
-		buttonPanel.add(refreshFireButton);
+		topButtonsPanel.add(setIpButton);
+		refreshButtonPanel.add(refreshFireButton);
+		lightButtonPanel.add(lightOnButton);
+		lightButtonPanel.add(lightOffButton);
 
 		//adding ActionListeners
+		setIpButton.addActionListener(new IpMenuItemActionListener(myConnectionManager));
 		refreshFireButton.addActionListener(new RefreshFireButtonListener(myModel,myConnectionManager));
+		lightOnButton.addActionListener(new LightsOnActionListener(myModel,myConnectionManager));
+		lightOffButton.addActionListener(new LightsOffActionListener(myModel,myConnectionManager));
 		ipMenuItem.addActionListener(new IpMenuItemActionListener(myConnectionManager));
 
 	}

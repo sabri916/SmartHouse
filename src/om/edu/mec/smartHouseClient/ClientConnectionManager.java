@@ -17,6 +17,20 @@ class ClientConnectionManager extends Observable{
 	private SmartHouseModel receivedModel = null;
 
 	SmartHouseModel getServerModel(){
+		return getServerModel("1");
+	}
+
+	SmartHouseModel lightsOn(){
+		return getServerModel("2");		
+	}
+
+	SmartHouseModel lightsOff(){
+		return getServerModel("3");
+	}
+
+
+
+	private SmartHouseModel getServerModel(String message){
 		try {
 			clientSocket = new Socket(serverAddress,REMOTE_PORT);
 			is = new ObjectInputStream (clientSocket.getInputStream());
@@ -30,7 +44,8 @@ class ClientConnectionManager extends Observable{
 		}
 
 		try {
-			os.writeBytes("1\n");
+			System.out.println("we sent: " + message);
+			os.writeBytes(message + "\n");
 			os.flush();
 		}
 		catch (IOException e) {

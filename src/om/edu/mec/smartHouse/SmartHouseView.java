@@ -39,7 +39,7 @@ class SmartHouseView extends Frame implements Observer{
 		//setSize and location and title
 		setTitle("Smart House Server");
 		setSize(650,500);
-		setLocation(1200,900);
+		setLocation(200,900);
 		addWindowListener(new WindowAdapter(){
 			public void windowClosing(WindowEvent e){
 				System.exit(0);
