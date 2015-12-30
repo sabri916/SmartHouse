@@ -35,6 +35,9 @@ class SmartHouseClientView extends Frame implements Observer{
 
 	private Panel topButtonsPanel;
 	private Panel statusPanel;
+	private FireStatusPanel fireStatusPanel;
+	private Panel leakStatusPanel;
+	private Panel lightStatusPanel;
 	private Panel bottomContainerPanel;
 	private Panel buttonContainerPanel;
 	private Panel refreshButtonPanel;
@@ -81,6 +84,9 @@ class SmartHouseClientView extends Frame implements Observer{
 
 		topButtonsPanel = new Panel(new FlowLayout(FlowLayout.LEFT,15,0));
 		statusPanel = new Panel(new GridLayout(1,3,50,50));
+		fireStatusPanel = new FireStatusPanel();
+		leakStatusPanel = new Panel(new FlowLayout());
+		lightStatusPanel = new Panel(new FlowLayout());
 		bottomContainerPanel = new Panel(new GridLayout(2,1));
 		buttonContainerPanel = new Panel(new GridLayout(1,2));
 		refreshButtonPanel = new Panel(new FlowLayout(FlowLayout.LEFT,15,0));
@@ -100,6 +106,11 @@ class SmartHouseClientView extends Frame implements Observer{
 		add(statusPanel, BorderLayout.CENTER);
 		add(bottomContainerPanel, BorderLayout.SOUTH);
 
+		//adding imagePanels to status panel
+		statusPanel.add(fireStatusPanel);
+		statusPanel.add(leakStatusPanel);
+		statusPanel.add(lightStatusPanel);
+
 		bottomContainerPanel.add(buttonContainerPanel);
 		bottomContainerPanel.add(ipStatusBarPanel);
 
@@ -109,9 +120,9 @@ class SmartHouseClientView extends Frame implements Observer{
 		ipStatusBarPanel.add(ipLabel);
 
 		//add status to layout
-		statusPanel.add(fireLabel);
-		statusPanel.add(leakLabel);
-		statusPanel.add(lightLabel);
+		//statusPanel.add(fireLabel);
+		//statusPanel.add(leakLabel);
+		//statusPanel.add(lightLabel);
 
 		//set Alignment of Label
 		fireLabel.setAlignment(Label.CENTER);
