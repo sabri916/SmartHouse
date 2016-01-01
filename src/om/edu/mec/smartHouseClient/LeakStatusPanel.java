@@ -38,7 +38,7 @@ public class LeakStatusPanel extends Panel{
 		/////image///////////////////
 
 		try{
-			img = ImageIO.read(new File("Articuno.jpg"));
+			img = ImageIO.read(new File("Articuno.png"));
 		}
 		catch(IOException e){
 			System.out.println(e);

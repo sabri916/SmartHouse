@@ -49,7 +49,7 @@ class SmartHouseClientView extends Frame implements Observer{
 		this.myConnectionManager = myConnectionManager;
 		//setSize and location and title
 		setTitle("Smart House Client");
-		setSize(650,500);
+		setSize(700,700);
 		setLocation(1200,900);
 		addWindowListener(new WindowAdapter(){
 			public void windowClosing(WindowEvent e){
