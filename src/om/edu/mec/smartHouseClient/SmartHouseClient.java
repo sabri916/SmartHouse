@@ -11,7 +11,11 @@ public class SmartHouseClient{
 		myModel.addObserver(myView);
 		myConnectionManager.addObserver(myView);
 		AutoUpdate au = new AutoUpdate(myModel,myConnectionManager);
-		new Thread(au).start();
+		try{
+			new Thread(au).start();
+		}catch(Exception e){
+			System.out.println("Cannot connect!");
+		}
 		myView.setVisible(true);
 		
 	}

@@ -1,0 +1,1 @@
+Main-Class: om.edu.mec.smartHouseClient.SmartHouseClient
