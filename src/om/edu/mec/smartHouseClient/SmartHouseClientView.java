@@ -36,8 +36,8 @@ class SmartHouseClientView extends Frame implements Observer{
 	private Panel topButtonsPanel;
 	private Panel statusPanel;
 	private FireStatusPanel fireStatusPanel;
-	private Panel leakStatusPanel;
-	private Panel lightStatusPanel;
+	private LeakStatusPanel leakStatusPanel;
+	private LightStatusPanel lightStatusPanel;
 	private Panel bottomContainerPanel;
 	private Panel buttonContainerPanel;
 	private Panel refreshButtonPanel;
@@ -85,8 +85,8 @@ class SmartHouseClientView extends Frame implements Observer{
 		topButtonsPanel = new Panel(new FlowLayout(FlowLayout.LEFT,15,0));
 		statusPanel = new Panel(new GridLayout(1,3,50,50));
 		fireStatusPanel = new FireStatusPanel();
-		leakStatusPanel = new Panel(new FlowLayout());
-		lightStatusPanel = new Panel(new FlowLayout());
+		leakStatusPanel = new LeakStatusPanel();
+		lightStatusPanel = new LightStatusPanel();
 		bottomContainerPanel = new Panel(new GridLayout(2,1));
 		buttonContainerPanel = new Panel(new GridLayout(1,2));
 		refreshButtonPanel = new Panel(new FlowLayout(FlowLayout.LEFT,15,0));
@@ -157,20 +157,27 @@ class SmartHouseClientView extends Frame implements Observer{
 		}
 
 		if(model.getFireStatus()){
+			fireStatusPanel.on();
 			fireLabel.setText("On Fire!!! T.T");
+			System.out.println("On Fire!!! T.T");
 		}else{
+			fireStatusPanel.off();
 			fireLabel.setText("No Fire");
 		}
 
 		if(model.getLeakStatus()){
+			leakStatusPanel.on();
 			leakLabel.setText("Water is leaking!!! T.T");
 		}else{
+			leakStatusPanel.off();
 			leakLabel.setText("No Water Leak");
 		}
 
 		if(model.getLightStatus()){
+			lightStatusPanel.on();
 			lightLabel.setText("Lights are On ^.^");
 		}else{
+			lightStatusPanel.off();
 			lightLabel.setText("Lights Off");
 		}
 	}

@@ -9,7 +9,7 @@ import java.io.File;
 import java.io.IOException;
 
 
-public class FireStatusPanel extends Panel{
+public class LightStatusPanel extends Panel{
 	
 	boolean isActive = false;
 
@@ -24,21 +24,21 @@ public class FireStatusPanel extends Panel{
 	Panel messagePanel;
 	Label warningMessage;
 
-	public FireStatusPanel(){
+	public LightStatusPanel(){
 
 		setLayout(new GridLayout(4,1));
 
 		//////heading//////////
 
-		fireStatusLabel = new Label("Fire Status");
+		fireStatusLabel = new Label("Lights Status");
 		fireStatusLabel.setFont(new Font(Font.SANS_SERIF,Font.BOLD,21));
 		fireStatusLabel.setAlignment(Label.CENTER);
-		fireStatusLabel.setForeground(Color.RED);
+		fireStatusLabel.setForeground(Color.YELLOW);
 
 		/////image///////////////////
 
 		try{
-			img = ImageIO.read(new File("Moltres.png"));
+			img = ImageIO.read(new File("Zapdos.png"));
 		}
 		catch(IOException e){
 			System.out.println(e);
@@ -67,10 +67,10 @@ public class FireStatusPanel extends Panel{
 				int x = getWidth()/2-r/2;
 				int y = getHeight()/2-r/2;
 				if(isActive){
-					g.setColor(Color.RED);
+					g.setColor(Color.YELLOW);
 				}
 				else{
-					g.setColor(Color.GREEN);
+					g.setColor(Color.GRAY);
 				}
 
 				g.fillOval(x,y,r,r);
@@ -80,7 +80,7 @@ public class FireStatusPanel extends Panel{
 
 		////Warning Message//////////////
 
-		warningMessage = new Label("No Fire");
+		warningMessage = new Label("No Lights");
 		warningMessage.setFont(new Font(Font.SANS_SERIF,Font.BOLD,18));
 		warningMessage.setAlignment(Label.CENTER);
 		warningMessage.setForeground(Color.GREEN);
@@ -96,8 +96,8 @@ public class FireStatusPanel extends Panel{
 		isActive = true;
 		statusLight.repaint();
 		imagePanel.repaint();
-		warningMessage.setForeground(Color.RED);
-		warningMessage.setText("Fire!!!");
+		warningMessage.setForeground(Color.YELLOW);
+		warningMessage.setText("Lights!!!");
 		validate();
 
 	}
@@ -106,8 +106,8 @@ public class FireStatusPanel extends Panel{
 		isActive = false;
 		statusLight.repaint();
 		imagePanel.repaint();
-		warningMessage.setForeground(Color.GREEN);
-		warningMessage.setText("No Fire");
+		warningMessage.setForeground(Color.GRAY);
+		warningMessage.setText("No Light");
 		validate();
 	}
 }

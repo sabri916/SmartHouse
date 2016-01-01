@@ -9,7 +9,7 @@ import java.io.File;
 import java.io.IOException;
 
 
-public class FireStatusPanel extends Panel{
+public class LeakStatusPanel extends Panel{
 	
 	boolean isActive = false;
 
@@ -24,21 +24,21 @@ public class FireStatusPanel extends Panel{
 	Panel messagePanel;
 	Label warningMessage;
 
-	public FireStatusPanel(){
+	public LeakStatusPanel(){
 
 		setLayout(new GridLayout(4,1));
 
 		//////heading//////////
 
-		fireStatusLabel = new Label("Fire Status");
+		fireStatusLabel = new Label("Leak Status");
 		fireStatusLabel.setFont(new Font(Font.SANS_SERIF,Font.BOLD,21));
 		fireStatusLabel.setAlignment(Label.CENTER);
-		fireStatusLabel.setForeground(Color.RED);
+		fireStatusLabel.setForeground(Color.BLUE);
 
 		/////image///////////////////
 
 		try{
-			img = ImageIO.read(new File("Moltres.png"));
+			img = ImageIO.read(new File("Articuno.jpg"));
 		}
 		catch(IOException e){
 			System.out.println(e);
@@ -80,7 +80,7 @@ public class FireStatusPanel extends Panel{
 
 		////Warning Message//////////////
 
-		warningMessage = new Label("No Fire");
+		warningMessage = new Label("No Leak");
 		warningMessage.setFont(new Font(Font.SANS_SERIF,Font.BOLD,18));
 		warningMessage.setAlignment(Label.CENTER);
 		warningMessage.setForeground(Color.GREEN);
@@ -97,7 +97,7 @@ public class FireStatusPanel extends Panel{
 		statusLight.repaint();
 		imagePanel.repaint();
 		warningMessage.setForeground(Color.RED);
-		warningMessage.setText("Fire!!!");
+		warningMessage.setText("Leak!!!");
 		validate();
 
 	}
@@ -107,7 +107,7 @@ public class FireStatusPanel extends Panel{
 		statusLight.repaint();
 		imagePanel.repaint();
 		warningMessage.setForeground(Color.GREEN);
-		warningMessage.setText("No Fire");
+		warningMessage.setText("No Leak");
 		validate();
 	}
 }
