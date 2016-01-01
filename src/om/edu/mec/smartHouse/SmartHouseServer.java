@@ -14,11 +14,7 @@ public class SmartHouseServer{
 		myModel.addObserver(myView);
 		myView.setVisible(true);
 
-		
-		new Thread(myConnectionManager).start();
-		new Thread(myConnectionManager).start();
-		new Thread(myConnectionManager).start();
-		new Thread(myConnectionManager).start();
+
 		new Thread(myConnectionManager).start();
 
 		System.out.println("Server Started...");
