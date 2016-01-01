@@ -15,32 +15,32 @@ public class SmartHouseModel extends Observable implements Serializable{
 		 isLightOn = false;
 	}
 
-	public boolean getFireStatus(){
+	public synchronized boolean getFireStatus(){
 		return isOnFire;
 	}
 
-	public void setFireStatus(boolean x){
+	public synchronized void setFireStatus(boolean x){
 		isOnFire=x;
 		setChanged();
 		notifyObservers();
 	}
 
 
-	public boolean getLeakStatus(){
+	public synchronized boolean getLeakStatus(){
 		return isLeaking;
 	}
 
-	public void setLeakStatus(boolean x){
+	public synchronized void setLeakStatus(boolean x){
 		isLeaking=x;
 		setChanged();
 		notifyObservers();
 	}
 
-	public boolean getLightStatus(){
+	public synchronized boolean getLightStatus(){
 		return isLightOn;
 	}
 
-	public void setLightStatus(boolean x){
+	public synchronized void setLightStatus(boolean x){
 		isLightOn=x;
 		setChanged();
 		notifyObservers();

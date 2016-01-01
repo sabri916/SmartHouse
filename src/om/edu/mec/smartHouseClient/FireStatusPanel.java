@@ -38,7 +38,7 @@ public class FireStatusPanel extends Panel{
 		/////image///////////////////
 
 		try{
-			img = ImageIO.read(new File("Moltres.png"));
+			img = ImageIO.read(new File("res/Moltres.png"));
 		}
 		catch(IOException e){
 			System.out.println(e);
