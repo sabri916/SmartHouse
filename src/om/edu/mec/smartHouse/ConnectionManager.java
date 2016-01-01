@@ -2,10 +2,11 @@ package om.edu.mec.smartHouse;
 
 import java.io.*;
 import java.net.*;
+import java.lang.Runnable;
 
 import om.edu.mec.smartHouseCommon.SmartHouseModel;
 
-class ConnectionManager{
+class ConnectionManager implements Runnable{
 	private final static int SERVER_PORT = 7242;
 	private ServerSocket myServerSocket = null;
 	private String stringReceived;
@@ -18,7 +19,11 @@ class ConnectionManager{
 		this.myModel = myModel;
 	}
 
-	void startServer(){
+	public void run(){
+		startServer();
+	}
+
+	private void startServer(){
 
 		try{
 			myServerSocket = new ServerSocket(SERVER_PORT);
@@ -41,6 +46,12 @@ class ConnectionManager{
 			try{
 				stringReceived = is.readLine();
 				System.out.println("string Received: " +  stringReceived);
+			}
+			catch(Exception ic){
+				ic.printStackTrace();
+			}
+			try{
+
 				if(stringReceived.equals("1")){
 					os.writeObject(myModel);
 				}
@@ -52,11 +63,11 @@ class ConnectionManager{
 					System.out.println("lights off");
 					os.writeObject(myModel);
 				}
+			}
+			catch(IOException e){
+				System.out.println(e);
+			}
 
-			}
-			catch(Exception ic){
-				ic.printStackTrace();
-			}
 			try{
 				is.close();
 				os.close();

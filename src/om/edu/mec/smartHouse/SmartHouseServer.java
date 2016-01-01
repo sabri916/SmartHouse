@@ -1,5 +1,7 @@
 package om.edu.mec.smartHouse;
 
+import java.lang.Thread;
+import java.lang.Runnable;
 import om.edu.mec.smartHouseCommon.SmartHouseModel;
 
 public class SmartHouseServer{
@@ -11,11 +13,14 @@ public class SmartHouseServer{
 		SmartHouseView myView = new SmartHouseView(myModel);
 		myModel.addObserver(myView);
 		myView.setVisible(true);
-		myConnectionManager.startServer();
 
 		
-		//socket class
+		new Thread(myConnectionManager).start();
+		new Thread(myConnectionManager).start();
+		new Thread(myConnectionManager).start();
+		new Thread(myConnectionManager).start();
+		new Thread(myConnectionManager).start();
 
-		System.out.println("Yellow");
+		System.out.println("Server Started...");
 	}
 }

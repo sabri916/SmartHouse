@@ -83,7 +83,7 @@ public class LightStatusPanel extends Panel{
 		warningMessage = new Label("No Lights");
 		warningMessage.setFont(new Font(Font.SANS_SERIF,Font.BOLD,18));
 		warningMessage.setAlignment(Label.CENTER);
-		warningMessage.setForeground(Color.GREEN);
+		warningMessage.setForeground(Color.GRAY);
 
 		////Add everything
 		add(fireStatusLabel);
