@@ -14,4 +14,4 @@ To Run Client
 java -classpath class/ om.edu.mec.smartHouseClient.SmartHouseClient
 
 To Generate JAR for Client
-jar cfm SmartHouseServer.jar serverManifest.txtC class/ om/edu/mec/smartHouseClient/ -C class/ om/edu/mec/smartHouseCommon/SmartHouseModel.class
+jar cfm SmartHouseClient.jar clientManifest.txt -C class/ om/edu/mec/smartHouseClient/ -C class/ om/edu/mec/smartHouseCommon/SmartHouseModel.class res/

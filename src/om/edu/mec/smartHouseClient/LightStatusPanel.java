@@ -38,7 +38,7 @@ public class LightStatusPanel extends Panel{
 		/////image///////////////////
 
 		try{
-			img = ImageIO.read(new File("res/Zapdos.png"));
+			img = ImageIO.read(getClass().getResource("/res/Zapdos.png"));
 		}
 		catch(IOException e){
 			System.out.println(e);
