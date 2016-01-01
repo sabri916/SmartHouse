@@ -1,11 +1,17 @@
-To Build 
+To Build Server
 javac src/om/edu/mec/smartHouse/*.java -d class/ -classpath class/
 
-To Run
+To Run Server
 java -classpath class/ om.edu.mec.smartHouse.SmartHouseServer
+
+To Generate JAR for Server
+jar cfm SmartHouseServer.jar serverManifest.txt -C class/ om/edu/mec/smartHouse/ -C class/ om/edu/mec/smartHouseCommon/SmartHouseModel.class
 
 To Build Client
 javac src/om/edu/mec/smartHouseClient/*.java -d class/ -classpath class/
 
 To Run Client
 java -classpath class/ om.edu.mec.smartHouseClient.SmartHouseClient
+
+To Generate JAR for Client
+jar cfm SmartHouseServer.jar serverManifest.txtC class/ om/edu/mec/smartHouseClient/ -C class/ om/edu/mec/smartHouseCommon/SmartHouseModel.class
