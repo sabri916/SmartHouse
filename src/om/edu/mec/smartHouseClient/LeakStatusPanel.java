@@ -98,7 +98,6 @@ public class LeakStatusPanel extends Panel{
 		imagePanel.repaint();
 		warningMessage.setForeground(Color.RED);
 		warningMessage.setText("Leak!!!");
-		validate();
 
 	}
 
@@ -108,6 +107,5 @@ public class LeakStatusPanel extends Panel{
 		imagePanel.repaint();
 		warningMessage.setForeground(Color.GREEN);
 		warningMessage.setText("No Leak");
-		validate();
 	}
 }

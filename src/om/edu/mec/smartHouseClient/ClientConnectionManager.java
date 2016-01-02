@@ -7,9 +7,12 @@ import java.util.Observable;
 import om.edu.mec.smartHouseCommon.SmartHouseModel;
 
 class ClientConnectionManager extends Observable{
+	//implements Observable because it holds the address to the server
+	//which appears in the user interface. 
+	//if the server address changed, the Observer, the view, needs to be notified
 
-	private final int REMOTE_PORT = 7242;
-	private String serverAddress = "127.0.0.1";
+	private final int REMOTE_PORT = 7242;			//port number
+	private String serverAddress = "127.0.0.1";		//server address, local machin by default
 
 	private Socket clientSocket =null;
 	private ObjectInputStream is = null;
@@ -17,22 +20,28 @@ class ClientConnectionManager extends Observable{
 	private SmartHouseModel receivedModel = null;
 
 	SmartHouseModel getServerModel(){
+		//requests model of the system from server
 		return getServerModel("1");
 	}
 
 	SmartHouseModel lightsOn(){
+		//requests switching on of lights then requests model of the system from server
 		return getServerModel("2");		
 	}
 
 	SmartHouseModel lightsOff(){
+		//requests switching off of lights then requests model of the system from server
 		return getServerModel("3");
 	}
 
 
 
 	private SmartHouseModel getServerModel(String message){
+		// the message string is passed on from the above methods
 		try {
+			//creation of connection socekt to server
 			clientSocket = new Socket(serverAddress,REMOTE_PORT);
+			//creation of inpout and output streams to enable sending and receiving of data
 			is = new ObjectInputStream (clientSocket.getInputStream());
 			os = new DataOutputStream(clientSocket.getOutputStream());
 		}
@@ -44,6 +53,7 @@ class ClientConnectionManager extends Observable{
 		}
 
 		try {
+			//sending message to server
 			System.out.println("we sent: " + message);
 			os.writeBytes(message + "\n");
 			os.flush();
@@ -53,6 +63,7 @@ class ClientConnectionManager extends Observable{
 		}
 
 		try {
+			//receiving model from Server
 			receivedModel = (SmartHouseModel)is.readObject();
 		} 
 		catch(IOException e) {
@@ -62,6 +73,7 @@ class ClientConnectionManager extends Observable{
 			System.out.println(e);
 		}
 		try {
+			//close to reclaim resources
 			is.close();
 			os.close();
 			clientSocket.close();
@@ -69,9 +81,12 @@ class ClientConnectionManager extends Observable{
 		catch(IOException e) {
 			System.out.println(e);
 		}
+		//return the model that is received from server
 		return receivedModel;
 	}
 
+
+	//setter and getter of the server address String
 	void setServerAddress(String s){
 		serverAddress = s;
 		System.out.println(serverAddress);

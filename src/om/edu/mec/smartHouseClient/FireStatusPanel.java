@@ -10,22 +10,29 @@ import java.io.IOException;
 
 
 public class FireStatusPanel extends Panel{
+	// This extends a panel to create a highly cuztomized panel
+	//This class is basically the colourful fancy bit of the frame in the middle
 	
-	boolean isActive = false;
+	private boolean isActive = false; // if this is true, then there is a fire
 
-	Panel heading;
-	Label fireStatusLabel;
+	//components for heading
+	private Panel heading;			
+	private Label fireStatusLabel;
 
-	Panel imagePanel;
-	BufferedImage img;
+	//components for the images
+	private Panel imagePanel;
+	private BufferedImage img;
 
-	Panel statusLight;
+	//Status light will be drawn on this panel
+	private Panel statusLight;
 
-	Panel messagePanel;
-	Label warningMessage;
+	//componenets for the status message 
+	private Panel messagePanel;
+	private Label warningMessage;
 
 	public FireStatusPanel(){
 
+		//Layout of the Panel
 		setLayout(new GridLayout(4,1));
 
 		//////heading//////////
@@ -37,6 +44,7 @@ public class FireStatusPanel extends Panel{
 
 		/////image///////////////////
 
+		//get Image from res folder
 		try{
 			img = ImageIO.read(getClass().getResource("/res/Moltres.png"));
 		}
@@ -44,14 +52,18 @@ public class FireStatusPanel extends Panel{
 			System.out.println(e);
 		}
 		
+		//These three lines will produce a grayscale image.
+		//gimg will hold the gray image, and imp will hold the coloured image
 		ImageFilter filter = new GrayFilter(true, 50);  
 		ImageProducer producer = new FilteredImageSource(img.getSource(), filter);  
 		Image gimg = Toolkit.getDefaultToolkit().createImage(producer);
 
+		//this overrides the paint method in the new panel such that it draws the image based on the size of the panel
 		imagePanel = new Panel(){
 			public void paint(Graphics g){
 
 				if(isActive){
+					//draws coloured image if active else, draw grayscale image
 					g.drawImage(img,0,0,getWidth(),getHeight(),null);
 				}
 				else{
@@ -63,10 +75,12 @@ public class FireStatusPanel extends Panel{
 		/////Status Light/////////////
 		statusLight = new Panel(){
 			public void paint(Graphics g){
-				int r = getHeight()-50;
-				int x = getWidth()/2-r/2;
-				int y = getHeight()/2-r/2;
+				//draws that circular status "light"
+				int r = getHeight()-50; //radius
+				int x = getWidth()/2-r/2; //x coordinate
+				int y = getHeight()/2-r/2; //y coordinate
 				if(isActive){
+					//colour is set according to whether the panel is active or not
 					g.setColor(Color.RED);
 				}
 				else{
@@ -79,6 +93,7 @@ public class FireStatusPanel extends Panel{
 		};
 
 		////Warning Message//////////////
+		//the warning messages are the default values
 
 		warningMessage = new Label("No Fire");
 		warningMessage.setFont(new Font(Font.SANS_SERIF,Font.BOLD,18));
@@ -93,21 +108,20 @@ public class FireStatusPanel extends Panel{
 	}
 
 	void on(){
-		isActive = true;
-		statusLight.repaint();
-		imagePanel.repaint();
-		warningMessage.setForeground(Color.RED);
-		warningMessage.setText("Fire!!!");
-		validate();
-
+		//turns the panel on or "Active" this is called if a fire is found
+		isActive = true; //changes the state of the class
+		statusLight.repaint(); //repaints the "Status light" to reflect the change
+		imagePanel.repaint(); //repaints the image to reflect the change
+		warningMessage.setForeground(Color.RED); //change colour of status message
+		warningMessage.setText("Fire!!!");	//Change the status message string
 	}
 
 	void off(){
+		//This is the opposite of the above method
 		isActive = false;
 		statusLight.repaint();
 		imagePanel.repaint();
 		warningMessage.setForeground(Color.GREEN);
 		warningMessage.setText("No Fire");
-		validate();
 	}
 }

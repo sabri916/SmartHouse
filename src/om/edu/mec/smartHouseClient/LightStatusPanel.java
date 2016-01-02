@@ -98,8 +98,6 @@ public class LightStatusPanel extends Panel{
 		imagePanel.repaint();
 		warningMessage.setForeground(Color.YELLOW);
 		warningMessage.setText("Lights!!!");
-		validate();
-
 	}
 
 	void off(){
@@ -108,6 +106,5 @@ public class LightStatusPanel extends Panel{
 		imagePanel.repaint();
 		warningMessage.setForeground(Color.GRAY);
 		warningMessage.setText("No Light");
-		validate();
 	}
 }

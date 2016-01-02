@@ -13,38 +13,39 @@ import java.io.IOException;
 import om.edu.mec.smartHouseCommon.SmartHouseModel;
 
 class SmartHouseClientView extends Frame implements Observer{
+	//Class extends a frame to create a window
+	//Class implements an Observer to "Observe" the Model and ConnectionManager
+	//Changes in the Connection Manager and Model needs to be refelceted onto the View (This class)
 
+	//Model and connection manger declared
 	private SmartHouseModel myModel;
 	private ClientConnectionManager myConnectionManager;
 
+	//All componenets declared
 	private MenuBar myMenuBar;
 	private Menu myMenu;
 	private MenuItem ipMenuItem;
 
-	private Label fireLabel;
-	private Label leakLabel;
-	private Label lightLabel;
 	private Label ipLabel;
-
-	private BufferedImage moltres; 
 
 	private Button setIpButton;
 	private Button refreshFireButton;
 	private Button lightOnButton;
 	private Button lightOffButton;
 
-	private Panel topButtonsPanel;
-	private Panel statusPanel;
-	private FireStatusPanel fireStatusPanel;
+	private Panel topButtonsPanel; //Panel to hold Set IP button
+	private Panel statusPanel;	//Panel to hold all the awesome graphics in the middle of the window
+	private FireStatusPanel fireStatusPanel; //These are customized panels in other files
 	private LeakStatusPanel leakStatusPanel;
 	private LightStatusPanel lightStatusPanel;
-	private Panel bottomContainerPanel;
-	private Panel buttonContainerPanel;
-	private Panel refreshButtonPanel;
-	private Panel lightButtonPanel;
-	private Panel ipStatusBarPanel;
+	private Panel bottomContainerPanel; //Panel to hold everything in the SOUTH protion of the window
+	private Panel buttonContainerPanel;	//Panel to hold all the buttons in the bottom
+	private Panel refreshButtonPanel; //Panel to hold refresh button
+	private Panel lightButtonPanel; //Panel to hold Light On and Light off buttons
+	private Panel ipStatusBarPanel; //Panel to hold status bar at the bottom
 
 	SmartHouseClientView(SmartHouseModel myModel,ClientConnectionManager myConnectionManager){
+		//model and connection manager referenced passed from the main class
 		this.myModel = myModel;
 		this.myConnectionManager = myConnectionManager;
 		//setSize and location and title
@@ -52,6 +53,7 @@ class SmartHouseClientView extends Frame implements Observer{
 		setSize(700,700);
 		setLocation(1200,900);
 		addWindowListener(new WindowAdapter(){
+			//Programming the window to close when the cross button is pressed
 			public void windowClosing(WindowEvent e){
 				System.exit(0);
 			}
@@ -62,26 +64,15 @@ class SmartHouseClientView extends Frame implements Observer{
 		myMenu = new Menu("options");
 		ipMenuItem = new MenuItem("Set Server IP");
 
-
-		fireLabel = new Label("No Fire");
-		leakLabel = new Label("No Water Leak");
-		lightLabel = new Label("Lights Off");
 		ipLabel = new Label("IP Address: "+ myConnectionManager.getServerAddress());
 		ipLabel.setAlignment(Label.LEFT);
-
-		try{
-			moltres = ImageIO.read(new File("Moltres.png"));
-		}
-		catch(IOException e){
-			System.out.println(e);
-		}
-
 
 		setIpButton = new Button("Set IP");
 		refreshFireButton = new Button("Refresh");
 		lightOnButton = new Button("Lights On");
 		lightOffButton = new Button("Lights Off");
 
+		//Panels are instantiated with the Layouts embeded
 		topButtonsPanel = new Panel(new FlowLayout(FlowLayout.LEFT,15,0));
 		statusPanel = new Panel(new GridLayout(1,3,50,50));
 		fireStatusPanel = new FireStatusPanel();
@@ -119,16 +110,6 @@ class SmartHouseClientView extends Frame implements Observer{
 
 		ipStatusBarPanel.add(ipLabel);
 
-		//add status to layout
-		//statusPanel.add(fireLabel);
-		//statusPanel.add(leakLabel);
-		//statusPanel.add(lightLabel);
-
-		//set Alignment of Label
-		fireLabel.setAlignment(Label.CENTER);
-		leakLabel.setAlignment(Label.CENTER);
-		lightLabel.setAlignment(Label.CENTER);
-
 		//add refresh button
 		topButtonsPanel.add(setIpButton);
 		refreshButtonPanel.add(refreshFireButton);
@@ -136,6 +117,8 @@ class SmartHouseClientView extends Frame implements Observer{
 		lightButtonPanel.add(lightOffButton);
 
 		//adding ActionListeners
+		//ActionListeners are in other files
+		//
 		setIpButton.addActionListener(new IpMenuItemActionListener(myConnectionManager));
 		refreshFireButton.addActionListener(new RefreshFireButtonListener(myModel,myConnectionManager));
 		lightOnButton.addActionListener(new LightsOnActionListener(myModel,myConnectionManager));
@@ -145,44 +128,40 @@ class SmartHouseClientView extends Frame implements Observer{
 	}
 
 	public void update(Observable o, Object arg){
-
+		//This method is called whenver a change is detected in the SmartHouseModel or ClientConnectionManager
 		SmartHouseModel model =myModel;
 
+		//if ClientConnectionManager triggered the update method point cast o as a ClientConnectionManager
+		//else Cast o as a SmartHouse Model
 		if(o instanceof ClientConnectionManager){
 			ClientConnectionManager c = (ClientConnectionManager) o;
-			ipLabel.setText("IP Address: " + c.getServerAddress());
+			ipLabel.setText("IP Address: " + c.getServerAddress()); //if IP Address is changed, through the dialog box, reflect that change onto the status bar
 		}
 		else{
 			model = (SmartHouseModel) o;
 		}
 
+
+		//Change the View according to the new changes in the model
+
+		//if fire/leak/lights are active enable or disable the panels
+		//the definition of on() and off() are in different files
 		if(model.getFireStatus()){
 			fireStatusPanel.on();
-			fireLabel.setText("On Fire!!! T.T");
-			System.out.println("On Fire!!! T.T");
 		}else{
 			fireStatusPanel.off();
-			fireLabel.setText("No Fire");
 		}
 
 		if(model.getLeakStatus()){
 			leakStatusPanel.on();
-			leakLabel.setText("Water is leaking!!! T.T");
 		}else{
 			leakStatusPanel.off();
-			leakLabel.setText("No Water Leak");
 		}
 
 		if(model.getLightStatus()){
 			lightStatusPanel.on();
-			lightLabel.setText("Lights are On ^.^");
 		}else{
 			lightStatusPanel.off();
-			lightLabel.setText("Lights Off");
 		}
-	}
-
-	public void paint(Graphics g){
-		//g.drawImage(moltres,50,50,null);
 	}
 }

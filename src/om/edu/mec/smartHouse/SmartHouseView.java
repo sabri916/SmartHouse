@@ -8,9 +8,14 @@ import java.awt.event.*;
 import om.edu.mec.smartHouseCommon.SmartHouseModel;
 
 class SmartHouseView extends Frame implements Observer{
+	//extends Frame to create a Window
+	//implements and Observer to "Observe" changes in the Model (SmartHouseModel)
+	//changes in the model will be reflected on this View
 
-	SmartHouseModel myModel;
+	SmartHouseModel myModel; //Model referenced to further pass it onto the Controller
 
+
+	//Declaration of all Component/Layouts and Panels for access throughout the class
 	private Label fireLabel;
 	private Label leakLabel;
 	private Label lightLabel;
@@ -35,18 +40,21 @@ class SmartHouseView extends Frame implements Observer{
 	private FlowLayout lightButtonLayout;
 
 	SmartHouseView(SmartHouseModel myModel){
+		//model passed from main class
 		this.myModel = myModel;
+
 		//setSize and location and title
 		setTitle("Smart House Server");
 		setSize(650,500);
 		setLocation(200,900);
 		addWindowListener(new WindowAdapter(){
+			//Programming the cross button of the window to close the application
 			public void windowClosing(WindowEvent e){
 				System.exit(0);
 			}
 		});
 
-		//instantiate 
+		//instantiate all the declated objects above giving initial values
 		fireLabel = new Label("No Fire");
 		leakLabel = new Label("No Water Leak");
 		lightLabel = new Label("Lights Off");
@@ -58,13 +66,14 @@ class SmartHouseView extends Frame implements Observer{
 		lightOn = new Button("Lights On");
 		ligthtOff = new Button("Lights Off");
 
+		//Panels are given layouts 
 		statusPanel = new Panel(new GridLayout(1,3,50,50));
 		buttonPanel = new Panel(new GridLayout(1,3,50,50));
 		fireButtonPanel = new Panel(new GridLayout(1,2));
 		leakButtonPanel = new Panel(new GridLayout(1,2));
 		lightButtonPanel = new Panel(new GridLayout(1,2));
 
-		//set layout manager
+		//set root layout manager
 		setLayout(new BorderLayout(10,10));
 
 		//add Panels to Main Layout
@@ -94,7 +103,8 @@ class SmartHouseView extends Frame implements Observer{
 		lightButtonPanel.add(lightOn);
 		lightButtonPanel.add(ligthtOff);
 
-		//adding ActionListeners
+		//adding ActionListeners - Each Button has its own ActionListeners in different Classes.
+		//models are passed to actionlisteners because they will be modified
 		fireOn.addActionListener(new FireOnButtonListener(myModel));
 		fireOff.addActionListener(new FireOffButtonListener(myModel));
 		leakOn.addActionListener(new LeakOnButtonListener(myModel));
@@ -105,9 +115,13 @@ class SmartHouseView extends Frame implements Observer{
 	}
 
 	public void update(Observable o, Object arg){
+		//the update button is inherited from the Observer interface
+		//when changes in the Observable (SmartHouseModel) are notified, the view can be updated in here
 
+		//this will cast the Observable into a SmartHouseModel to enable calling of its methods
 		SmartHouseModel model = (SmartHouseModel) o;
 
+		//depending on the Model, labels are Modified
 		if(model.getFireStatus()){
 			fireLabel.setText("On Fire!!! T.T");
 		}else{
